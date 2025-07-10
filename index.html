@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LangVault AI – Translate Docs Instantly</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg" />
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-circle circle1"></div>
+        <div class="bg-circle circle2"></div>
+        <div class="bg-circle circle3"></div>
+        <div class="bg-circle circle4"></div>
+        <div class="bg-circle circle5"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <span class="brand-text">LangVault</span>
+                <div class="ai-badge">AI</div>
+            </div>
+            <div class="nav-links glass-nav">
+                <a href="#translate" class="nav-link">Translate</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contactUs" class="nav-link">Contact Us</a>
+            </div>
+            <div class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </div>
+            <div class="bars" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+
+        </div>
+
+        <!-- For Mobile view -->
+        <div class="mobile-menu" id="mobileMenu">
+            <div class="close">
+                <i class="fas fa-times"></i>
+            </div>
+            <div class="mobile-links">
+                <a href="#translate" class="nav-link">Translate</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contactUs" class="nav-link">Contact Us</a>
+                <div class="theme-toggle" id="mobileThemeToggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-sparkles"></i>
+                    <span>Powered by AI</span>
+                </div>
+                <h1 class="hero-title">
+                    Break
+                    <span class="gradient-text">Language Barriers</span>
+                    in a Click
+                </h1>
+                <p class="hero-subtitle">
+                    Upload files, select your language, and get instant, accurate translations powered by AI. Fast,
+                    secure, and easy to use.
+                </p>
+            </div>
+        </section>
+
+        <!-- Upload Section -->
+        <section class="upload-section" id="translate">
+            <div class="upload-container">
+                <!-- Error Alert (Hidden by default) -->
+                <div class="error-alert" id="errorAlert" style="display: none;">
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="alert-content">
+                        <h4>Translation Error</h4>
+                        <p id="errorMessage"></p>
+                    </div>
+                </div>
+
+                <div class="upload-card glass-card">
+                    <div class="card-header">
+                        <div class="header-icon">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <div class="header-content">
+                            <h3>Upload Document</h3>
+                            <p>Select your PDF file and desired language</p>
+                        </div>
+                    </div>
+
+                    <form class="upload-form" id="uploadForm">
+                        <!-- File Upload Area -->
+                        <div class="file-drop-zone" id="dropZone">
+                            <div class="drop-zone-content">
+                                <div class="upload-icon">
+                                    📄
+                                </div>
+                                <h4>Drop your File here</h4>
+                                <p>or <span class="browse-text" id="browseText">browse</span></p>
+                                <div class="file-info">
+                                    <i class="fas fa-info-circle"></i>
+                                    <span>Maximum file size: 50MB</span>
+                                </div>
+                            </div>
+                            <input type="file" id="fileInput" name="file" accept=".pdf,.docx,.txt" required hidden>
+                            <div class="file-preview" id="filePreview" style="display: none;">
+                                <div class="file-item">
+                                    <i class="fas fa-file-pdf"></i>
+                                    <div class="file-details">
+                                        <span class="file-name" id="fileName"></span>
+                                        <span class="file-size" id="fileSize"></span>
+                                    </div>
+                                    <button type="button" class="remove-file" id="removeFile">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Language Selection -->
+                        <div class="form-group">
+                            <label for="language" class="form-label">
+                                <i class="fas fa-globe"></i>
+                                desired Language
+                            </label>
+                            <div class="language-input-container">
+                                <input type="text" id="language" name="language" class="form-input"
+                                    placeholder="Enter desired language (e.g., Hindi, Spanish, German)" required>
+                                <div class="language-suggestions" id="languageSuggestions">
+                                    <div class="suggestion-item" data-lang="Spanish">🇪🇸 Spanish</div>
+                                    <div class="suggestion-item" data-lang="French">🇫🇷 French</div>
+                                    <div class="suggestion-item" data-lang="German">🇩🇪 German</div>
+                                    <div class="suggestion-item" data-lang="Italian">🇮🇹 Italian</div>
+                                    <div class="suggestion-item" data-lang="Portuguese">🇵🇹 Portuguese</div>
+                                    <div class="suggestion-item" data-lang="Japanese">🇯🇵 Japanese</div>
+                                    <div class="suggestion-item" data-lang="Korean">🇰🇷 Korean</div>
+                                    <div class="suggestion-item" data-lang="Chinese">🇨🇳 Chinese</div>
+                                    <div class="suggestion-item" data-lang="Hindi">🇮🇳 Hindi</div>
+                                    <div class="suggestion-item" data-lang="Arabic">🇸🇦 Arabic</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <span class="btn-content">
+                                <i class="fas fa-magic"></i>
+                                <span class="btn-text">Translate with LangVault</span>
+                            </span>
+                            <div class="btn-loader" style="display: none;">
+                                <div class="loader-spinner"></div>
+                                <span>Processing...</span>
+                            </div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section (Hidden by default) -->
+        <section class="results-section" id="resultsSection" style="display: none">
+            <div class="results-container">
+                <div class="results-card glass-card">
+                    <div class="results-header">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="results-info">
+                            <h3>Translation Complete</h3>
+                            <p id="pageCountText">pages successfully processed</p>
+                        </div>
+                        <div class="results-actions">
+                            <button class="action-btn" id="copyText" title="Copy to clipboard">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                            <button class="action-btn" id="downloadText" title="Download as text file">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="translation-content">
+                        <div class="content-tabs">
+                            <button class="tab-btn active" data-tab="preview">
+                                <i class="fas fa-eye"></i>
+                                Preview
+                            </button>
+                            <button class="tab-btn" data-tab="formatted">
+                                <i class="fas fa-align-left"></i>
+                                Formatted
+                            </button>
+                        </div>
+
+                        <div class="tab-content active" id="preview">
+                            <div class="translated-text" id="translatedTextPreview">
+                                <!-- Translation result will be inserted here -->
+                            </div>
+                        </div>
+
+                        <div class="tab-content" id="formatted">
+                            <pre class="formatted-text" id="translatedTextFormatted">
+                                <!-- Formatted translation will be inserted here -->
+                            </pre>
+                        </div>
+                    </div>
+
+                    <!-- Statistics -->
+                    <div class="translation-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-file-alt"></i>
+                            <div class="stat-info">
+                                <span class="stat-value" id="statPages">0</span>
+                                <span class="stat-label">Pages</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-clock"></i>
+                            <div class="stat-info">
+                                <span class="stat-value" id="statTime">~2min</span>
+                                <span class="stat-label">Processing</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-language"></i>
+                            <div class="stat-info">
+                                <span class="stat-value">AI</span>
+                                <span class="stat-label">Powered</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section" id="features">
+            <div class="features-container">
+                <div class="section-header">
+                    <h2>Why Choose LangVault?</h2>
+                    <p>Experience the future of document translation with cutting-edge AI technology</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>AI-Powered Accuracy</h4>
+                        <p>Advanced language models ensure contextually accurate translations that preserve meaning and
+                            tone.</p>
+                    </div>
+                    <div class="feature-card fade">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h4>Structure Preservation</h4>
+                        <p>Maintains original document formatting, headers, and layout for professional results.</p>
+                    </div>
+                    <div class="feature-card fade">
+                        <div class="feature-icon">
+                            <i class="fas fa-globe-americas"></i>
+                        </div>
+                        <h4>Multiple Languages</h4>
+                        <p>Support for dozens of languages with native-level fluency and cultural context.</p>
+                    </div>
+                    <div class="feature-card fade">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Lightning Fast</h4>
+                        <p>Process entire documents in minutes, not hours. Efficient AI processing at scale.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Section -->
+    <section class="features-section" id="about">
+        <div class="features-container">
+            <div class="section-header">
+                <h2>About LangVault</h2>
+                <p>LangVault is an AI-powered document translator built to simplify cross-language communication and
+                    empower global understanding.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade">
+                    <div class="feature-icon"><i class="fas fa-book-open"></i></div>
+                    <h4>Mission</h4>
+                    <p>To make professional, accurate document translation accessible to everyone using cutting-edge AI
+                        technology.</p>
+                </div>
+                <div class="feature-card fade">
+                    <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Privacy First</h4>
+                    <p>Your documents are processed securely and never stored. We respect your privacy and data
+                        integrity.</p>
+                </div>
+                <div class="feature-card fade">
+                    <div class="feature-icon"><i class="fas fa-code"></i></div>
+                    <h4>Powered by OpenRAG</h4>
+                    <p>Developed by OpenRAG, LangVault integrates smart AI pipelines for reliable language processing at
+                        scale.</p>
+                </div>
+                <div class="feature-card fade">
+                    <div class="feature-icon"><i class="fas fa-user-friends"></i></div>
+                    <h4>Built for Everyone</h4>
+                    <p>Whether you're a student, researcher, or global business, LangVault is built to help you bridge
+                        language barriers effortlessly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="brand-icon">
+                    <i class="fas fa-language"></i>
+                </div>
+                <span>LangVault</span>
+            </div>
+            <div class="social-links" id="contactUs">
+                <a href="https://www.instagram.com/open.rag?igsh=MWRvMmpmMDJ0Ym94NA==" target="_blank"
+                    class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.linkedin.com/company/openrag1/posts/?feedView=all" target="_blank"
+                    class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:openrag189@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Powered by <strong>OpenRAG</strong> | © 2024 LangVault. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/static/script.js" defer></script>
+</body>
+
+</html>
